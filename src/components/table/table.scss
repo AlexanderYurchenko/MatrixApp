@@ -1,0 +1,172 @@
+.c-table {
+  position: relative;
+  padding: 0 23px 23px 0;
+  overflow: auto;
+  font-size: 20px;
+
+  &__in {
+    display: table;
+    
+  }
+
+  &__row {
+    display: table-row;
+
+    &:first-child {
+      .c-table__cell {
+        border-top: 2px solid #acb9d0;
+      }
+    }
+
+    &--hide {
+      .c-table {
+        &__bg {
+          height: 0 !important;
+        }
+
+        &__val-default {
+          display: block;
+          opacity: 1;
+        }
+
+        &__val-aux {
+          display: none;
+        }
+      }
+    }
+
+    &--aux {
+      background: transparent;
+    }
+  }
+
+  &__cell {
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    padding: 6px 15px 5px;
+    height: 50px;
+    width: 74px;
+    border-bottom: 2px solid #acb9d0;
+    cursor: pointer;
+    
+    &:first-child {
+      border-left: 2px solid #acb9d0;
+    }
+
+    &:nth-last-child(2) {
+      border-right: 2px solid #acb9d0;
+    }
+
+    &--aux {
+      background: #f4f6ff;
+      border-color: transparent !important;
+      cursor: default;
+    }
+
+    &--highlight {
+      background: #dae1ff;
+    }
+  }
+
+  &__cell-val {
+    position: relative;
+    z-index: 2;
+  }
+
+  &__val-default {
+    opacity: 0;
+  }
+
+  &__val-aux {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+  }
+
+  &__bg {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: #dae1ff;
+    transition: all .3s;
+  }
+
+  &__btn-remove {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 23px;
+    height: 23px;
+    background: #ef8686;
+    border: none;
+    cursor: pointer;
+    transition: all .2s;
+
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin: -7px 0 0 -2px;
+      width: 3px;
+      height: 13px;
+      background: #fff;
+      transition: all .3s;
+      transform: rotate(-135deg);
+    }
+
+    &:after {
+      transform: rotate(-45deg);
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+      outline: none;
+      background: #ff3f3f;
+    }
+  }
+
+  &__btn-add {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 23px;
+    height: 23px;
+    background: #3f68a1;
+    border: none;
+    cursor: pointer;
+
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin: -7px 0 0 -2px;
+      width: 3px;
+      height: 13px;
+      background: #fff;
+      transition: all .3s;
+    }
+
+    &:after {
+      transform: rotate(90deg);
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+      outline: none;
+      background: #2861af;
+    }
+  }
+}

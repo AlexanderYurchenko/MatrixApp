@@ -1,0 +1,60 @@
+@import '../../common.scss';
+
+.c-intake {
+  margin-bottom: 30px;
+
+  &__title {
+    margin-bottom: 12px;
+    font-size: 24px;
+    line-height: $line-height-basic;
+    font-weight: $font-main-extrabold;
+    color: #3f68a1;
+  }
+
+  &__box {
+
+  }
+
+  &__col {
+    margin: 12px 0 0;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  &__error {
+    margin: 8px 0 0;
+    color: #fe0000;
+    font-size: 12px;
+  }
+
+  &__btn-box {
+    margin: 15px 0 0;
+    text-align: center;
+  }
+
+  @media (min-width: $tablet) {
+    &__box {
+      margin: -12px -10px 0;
+    }
+
+    &__col {
+      display: inline-block;
+      vertical-align: top;
+      width: 33.33%;
+      padding: 0 10px;
+
+      &:first-child {
+        margin-top: 12px;
+      }
+    }
+  }
+
+  @media (min-width: $screen) {
+    &__title {
+      margin-bottom: 18px;
+      font-size: 37px;
+    }
+  }
+}

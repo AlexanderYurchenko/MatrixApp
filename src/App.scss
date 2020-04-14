@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:500,700,800');
+@import './common.scss';
+
+body {
+  margin: 0;
+  font-family: $font-family;
+  font-size: $font-size-basic;
+  font-weight: $font-main-medium;
+  line-height: $line-height-basic;
+  color: $text-main;
+
+  @media (min-width: 768px) {
+    font-size: $font-size-tablet;
+  }
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  min-width: 320px;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100%;
+  overflow: hidden;
+}
+
+.w-inner {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.w-center {
+  max-width: $page-width;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 0 15px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.w-content {
+  position: relative;
+  padding: 20px 0;
+  flex: 1;
+}
+
+.c-header {
+  background-color: #f7f7f7;
+
+  &__in {
+    width: 100%;
+    position: relative;
+    padding: 14px 0 6px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  &__logo {
+    position: relative;
+    font-size: 26px;
+    line-height: 1.5;
+    margin: 0;
+    font-weight: $font-main-extrabold;
+    color: $text-logo;
+    transform: perspective(1px) translateZ(0);
+
+    &:before {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      top: 3px;
+      left: -6px;
+      display: block;
+      width: 98px;
+      height: 33px;
+      background: #fff600;
+      transform: rotate(-3deg);
+    }
+  }
+
+  @media (min-width: $screen-sm) {
+    &__in {
+      padding-top: 25px;
+      padding-bottom: 24px;
+    }
+  }
+}
+
+.c-btn {
+  position: relative;
+  top: 0;
+  min-height: 42px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  text-decoration: none;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 800;
+  min-height: 25px;
+  line-height: $line-height-basic;
+  padding: 5px 15px;
+  margin-bottom: 3px;
+  cursor: pointer;
+  color: $text-color-invert;
+  background: $btn-default;
+  box-shadow: 0 3px 0 #2256a0;
+  border: none;
+  border-radius: 2px;
+  transition: all .1s;
+
+  &:active {
+    background: $btn-default-active;
+    box-shadow: 0 0 0 #2256a0 !important;
+    top: 3px;
+  }
+
+  &:hover,
+  &:focus {
+    background: $btn-default-hover;
+    outline: none;
+  }
+
+  @media (min-width: $screen-sm) {
+    font-size: 21px;
+    min-height: 47px;
+  }
+}
