@@ -6,18 +6,18 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 #### `npx install create-react-app`
 
 **Install SASS compiler**
-npm install node-sass
+#### `npm install node-sass`
 
 **Install Redux**
-npm install redux react-redux
+#### `npm install redux react-redux`
 
 **Install Thunk for middleware**
-npm install redux-thunk
+#### `npm install redux-thunk`
 
 ## To deploy build locally
 
-### `npm install -g serve`
-### `serve -s build`
+#### `npm install -g serve`
+#### `serve -s build`
 
 ## Available Scripts
 
