@@ -14,6 +14,11 @@ npm install redux react-redux
 **Install Thunk for middleware**
 npm install redux-thunk
 
+## To deploy build locally
+
+npm install -g serve
+serve -s build
+
 ## Available Scripts
 
 In the project directory, you can run:
