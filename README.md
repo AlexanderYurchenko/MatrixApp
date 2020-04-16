@@ -3,7 +3,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## To run project
 
 **Install create-react-app:**
-# `npx install create-react-app`
+#### `npx install create-react-app`
 
 **Install SASS compiler**
 npm install node-sass
