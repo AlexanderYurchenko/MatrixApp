@@ -1,10 +1,8 @@
-import generateReducer from './generateReducer';
-import removeRowReducer from './removeRowReducer';
+import tableReducer from './tableReducer';
 import { combineReducers } from 'redux';
 
 const allReducers = combineReducers({
-  generateReducer: generateReducer,
-  removeRowReducer: removeRowReducer
+  tableReducer: tableReducer
 })
 
 export default allReducers;

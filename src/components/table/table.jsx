@@ -1,49 +1,9 @@
 import React, { Component } from 'react';
 import './table.scss';
 import { connect } from 'react-redux';
+import { hoverSum, cellClick, removeClick, createClick } from '../../actions';
 
 class Table extends Component {
-  state = { 
-    table: [],
-    tableId: 0,
-    spread: 0
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { columns, rows: rowsQuantity, spread } = nextProps.payload;
-    if (prevState.tableId !== nextProps.payload.id) {
-      let table = [];
-
-      for (let i = 0; i < rowsQuantity; i++) {
-        let cells = [];
-        for (let j = 0; j < columns; j++) {
-          const digit = Math.floor(100 + Math.random() * 900);
-          const cell = {
-            id: '' + i + j,
-            amount: digit
-          }
-          cells.push(cell);
-        }
-
-        let row = {
-          id: i,
-          cells: cells,
-          sumIsHovered: false
-        }
-
-        table.push(row);
-      }   
-
-      return {
-        table: table,
-        tableId: nextProps.payload.id,
-        spread: spread
-      }
-    } else {
-      return null;
-    }
-  }
-
   renderCells(row) {
     let cells = [];
     var sum = 0;
@@ -76,18 +36,18 @@ class Table extends Component {
 
   renderRows(){
     let content = [];
-    const { table } = this.state;
+    const { table } = this.props;
     
     for (let i = 0; i < table.length; i++) {
       let rowId = table[i].id;
-      content[i] = (<div key={i} data-row={rowId} className="c-table__row c-table__row--hide">{this.renderCells(table[i], i)}</div>);
+      content[i] = (<div key={i} data-row={rowId} className={"c-table__row" + (table[i].sumIsHovered ? '' : ' c-table__row--hide')}>{this.renderCells(table[i], i)}</div>);
     }
 
     return content;
   }
 
   renderFooter(){
-    let { table } = this.state;
+    let { table } = this.props;
     let transpondedTable = table[0].cells.map(function(col, i){
       return table.map(function(row){
         return row.cells[i];
@@ -122,90 +82,35 @@ class Table extends Component {
     const rowNum = event.currentTarget.parentElement.getAttribute('data-row');
     event.persist();
 
-    let $row = document.body.querySelector(`[data-row='${rowNum}']`);
+    const payload = {
+      table: this.props.table,
+      rowNum,     
+      eventType: event.type     
+    }
 
-    this.setState(prevState => {
-      let table = [ ...prevState.table ];
-      if (table[rowNum]) {
-        if (event.type === 'mouseenter') {
-          table[rowNum].sumIsHovered = true;  
-        } else {
-          table[rowNum].sumIsHovered = false; 
-        };
-        return table 
-      }
-      return
-    }, () => {
-      if (this.state.table[rowNum] && this.state.table[rowNum].sumIsHovered) {
-        $row.classList.remove('c-table__row--hide')
-      } else if ($row) {
-        $row.classList.add('c-table__row--hide')
-      }
-    })
+    this.props.hoverSum(payload);
   }
 
   handleCellClick = (event) => {
     const cellId = event.currentTarget.getAttribute('id');
     const rowNum = event.currentTarget.parentElement.getAttribute('data-row');
-
-    this.setState(prevState => {
-      let table = [ ...prevState.table ];
-
-      table[rowNum].cells.map(function(cell){
-        if (cell.id === cellId) {
-          cell.amount++ 
-        }
-      });
-      return table  
-    })
+    this.props.cellClick(cellId, rowNum);
   }
 
   handleRemoveClick = (event) => {
-    const rowNum = event.currentTarget.closest('[data-row]').getAttribute('data-row');
-    const index = this.getIndex(rowNum, this.state.table);
+    const rowNum = event.currentTarget.closest('[data-row]').getAttribute('data-row'),
+          rowIndex = this.getIndex(rowNum, this.props.table);
 
-    this.setState(({ table }) => {
-      const newTable = [ ...table ]
-      if (index >= 0) {
-        newTable.splice(index, 1)
-      }
-      return { table: newTable }
-    })
+    this.props.removeClick(rowIndex);
   }  
 
   handleCreateClick = () => {
-    const { table } = this.state;
-    const slicedTable = [...table].slice(-1);
-    const lastId = slicedTable[0].id;
-    let newTable = [...table];
-    const colsQuantity = slicedTable[0].cells.length;
-    let cells = [];
-    const i = lastId + 1;
-
-    for (let j = 0; j < colsQuantity; j++) {
-      const digit = Math.floor(100 + Math.random() * 900);
-      const cell = {
-        id: '' + i + j,
-        amount: digit
-      }
-      cells.push(cell);
-    }
-
-    let row = {
-      id: i,
-      cells: cells,
-      sumIsHovered: false
-    }
-
-    newTable.push(row);
-    this.setState({
-      table: newTable
-    })
+    this.props.createClick();
   }
 
   handleCellHover = (event) => {
     if (event.type === 'mouseenter') {
-      const { table, spread } = this.state;
+      const { table, spread } = this.props;
       const cellId = event.currentTarget.getAttribute('id');
       const cellValue = this.searchCell(cellId, table, 'id').amount;
       const allValues = this.getAllCellsValues(table);
@@ -230,10 +135,9 @@ class Table extends Component {
   }
 
   getIndex(value, arr) {
-    for(var i = 0; i < arr.length; i++) {
+    for(let i = 0; i < arr.length; i++) {
       let id = arr[i].id.toString();
       if(id === value) {
-        console.log(id)
         return i;
       }
     }
@@ -300,11 +204,9 @@ class Table extends Component {
   }
 
   render() { 
-    console.log(this.state);
-
     return (
       <React.Fragment>
-        {this.state.table.length ? 
+        {this.props.table.length ? 
         <div className="c-table">
           <div className="c-table__in">
             {this.renderRows()}
@@ -321,8 +223,19 @@ class Table extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    payload: state.generateReducer.payload
+    table: state.tableReducer.table,
+    id: state.tableReducer.id,
+    spread: state.tableReducer.spread
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    hoverSum: (payload) => dispatch(hoverSum(payload)),
+    cellClick: (cellId, rowNum) => dispatch(cellClick(cellId, rowNum)),
+    removeClick: (rowIndex) => dispatch(removeClick(rowIndex)),
+    createClick: () => dispatch(createClick())
   }
 }
  
-export default connect(mapStateToProps)(Table);
+export default connect(mapStateToProps, mapDispatchToProps)(Table);

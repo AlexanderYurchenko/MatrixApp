@@ -5,7 +5,7 @@ import Table from './components/table/table';
 import { connect } from 'react-redux';
 
 function App(props) {
-  const { payload } = props;
+  const { table } = props;
 
   return (
     <React.Fragment>
@@ -20,7 +20,7 @@ function App(props) {
         <div className="w-center">
           <div className="w-content">
             <Intake />
-            { payload && <Table /> }
+            { table && table.length && <Table /> }
           </div>
         </div>
       </div>
@@ -30,7 +30,7 @@ function App(props) {
 
 const mapStateToProps = (state) => {
   return {
-    payload: state.generateReducer.payload
+    table: state.tableReducer.table
   }
 }
 

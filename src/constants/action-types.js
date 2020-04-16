@@ -1,3 +1,6 @@
 export const GENERATE_TABLE = "GENERATE_TABLE";
 export const GENERATE_TABLE_ERROR = "GENERATE_TABLE_ERROR";
-export const REMOVE_ROW = "REMOVE_ROW";
+export const HOVER_SUM = "HOVER_SUM";
+export const CELL_CLICK = "CELL_CLICK";
+export const REMOVE_CLICK = "REMOVE_CLICK";
+export const CREATE_CLICK = "CREATE_CLICK";

@@ -2,14 +2,11 @@ import React, { Component } from 'react';
 import './form-group.scss';
 
 class FormGroup extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: '',
-      title: '',
-      value: '', 
-    };
-  }
+  state = {
+    name: '',
+    title: '',
+    value: '', 
+  };
 
   componentDidMount() {
     this.setState({ 

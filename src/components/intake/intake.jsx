@@ -2,18 +2,15 @@ import React, { Component } from 'react';
 import './intake.scss';
 import FormGroup from "../form-group/form-group";
 import { connect } from 'react-redux';
-import { generateTable } from '../../actions'
+import { generateTable } from '../../actions';
 
 class Intake extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {  
-      columns: null,
-      rows: null,
-      spread: null,
-      id: 1,
-      error: null
-    }
+  state = {  
+    columns: null,
+    rows: null,
+    spread: null,
+    id: 1,
+    error: null
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -37,8 +34,6 @@ class Intake extends Component {
   }
 
   render() { 
-    console.log(this.state);
-
     return ( 
       <form className="c-intake" onSubmit={this.handleSubmit}>
         <div className="c-intake__title">Table parameters</div>
@@ -75,7 +70,7 @@ class Intake extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    error: state.generateReducer.error
+    error: state.tableReducer.error
   }
 }
 
