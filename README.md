@@ -16,8 +16,8 @@ npm install redux-thunk
 
 ## To deploy build locally
 
-npm install -g serve
-serve -s build
+### `npm install -g serve`
+### `serve -s build`
 
 ## Available Scripts
 
