@@ -109,27 +109,28 @@ class Table extends Component {
   }
 
   handleCellHover = (event) => {
+    const highlightClass = 'c-table__cell--highlight';
+
     if (event.type === 'mouseenter') {
-      const { table, spread } = this.props;
-      const cellId = event.currentTarget.getAttribute('id');
-      const cellValue = this.searchCell(cellId, table, 'id').amount;
-      const allValues = this.getAllCellsValues(table);
+      const { table, spread } = this.props,            
+            cellId = event.currentTarget.getAttribute('id'),
+            cellValue = this.searchCell(cellId, table, 'id').amount,
+            allValues = this.getAllCellsValues(table);
       
       const highlightedValues = this.findClosestValues(cellValue, spread, allValues);
       const highlightedValuesLength = highlightedValues ? highlightedValues.length : 0;
 
       for (let i = 0; i < highlightedValuesLength; i++) {
-        const cell = this.searchCell(highlightedValues[i], table, 'amount');
-        const cellId = cell.id;
-        
-        const $cell = document.getElementById(`${cellId}`);
-        $cell.classList.add('c-table__cell--highlight');
+        const cell = this.searchCell(highlightedValues[i], table, 'amount'),
+              cellId = cell.id,
+              $cell = document.getElementById(`${cellId}`);
+        $cell.classList.add(highlightClass);
       }
     } else {
       const $cells = document.querySelectorAll(".c-table__cell--highlight");
 
       [].forEach.call($cells, function($cell) {
-        $cell.classList.remove('c-table__cell--highlight');
+        $cell.classList.remove(highlightClass);
       });
     }
   }
