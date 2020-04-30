@@ -26,12 +26,12 @@ function App(props) {
       </div>
     </React.Fragment>
   );
-}
+};
 
 const mapStateToProps = (state) => {
   return {
     table: state.tableReducer.table
-  }
-}
+  };
+};
 
 export default connect(mapStateToProps)(App);

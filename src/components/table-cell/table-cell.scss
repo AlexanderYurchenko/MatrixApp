@@ -1,0 +1,51 @@
+.c-table-cell {
+  position: relative;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  padding: 6px 15px 5px;
+  height: 50px;
+  width: 74px;
+  border-bottom: 2px solid #acb9d0;
+  cursor: pointer;
+
+  &:first-child {
+    border-left: 2px solid #acb9d0;
+  }
+
+  &:nth-last-child(2) {
+    border-right: 2px solid #acb9d0;
+  }
+
+  &--highlight {
+    background: #dae1ff;
+  }
+
+  &__val {
+    position: relative;
+    z-index: 2;
+  }
+
+  &__val-default {
+    opacity: 0;
+  }
+
+  &__val-aux {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+  }
+
+  &__bg {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: #dae1ff;
+    transition: all .3s;
+  }
+}

@@ -1,0 +1,15 @@
+.c-table-footer {
+  display: table-row;
+
+  &__cell {
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    padding: 6px 15px 5px;
+    height: 50px;
+    width: 74px;
+    border-bottom: 2px solid transparent;
+    background: #f4f6ff;
+  }
+}
