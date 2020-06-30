@@ -1,5 +1,12 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+This App is matrix M*N (rows, cols), where each cell value is random 3-digit integer. 
+Each row has a cell with sum of its values, and each column has cell that shows average value of its cells' ones.
+Rows can be removed and added with new random values.
+Hovering cell with value  highlights X (spread) cells whose values are the closest to current cell's one.
+Clicking on cell with value increases its value by 1.
+Hovering cell with sum shows each cell's contribution to whole sum in percents.
+
 ## To run project
 
 **Install create-react-app:**
